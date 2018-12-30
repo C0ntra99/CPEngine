@@ -1,0 +1,75 @@
+CPEngine:
+
+Desc:
+    Cyber Patriot scoring engine application. Will take any machine and inject vulnerabilities into the image. 
+    Once the vulnerabilities are injected a scoring engine will be created to keep track of if they get patched or not.
+    Will work on linux or windows.
+
+Features:
+    - standalone:
+        - will provide a menu for a user to select which vulnerabilities to choose from
+        - spin up a scoring engine to check every 30 seconds
+        - custom vulnerabilities
+        - custom forensics questions 
+        - save custom config for later use
+
+    - client/server:
+        - all the same features as the standalone version
+        - will also report back to a central server 
+        - central server will be the same app but in a different mode
+        - server should be able to handle more than one image at once via API keys
+        - client should have a built in REST API to communicate to the server
+        - needs to be two different modes
+        - can be password protected
+        - generate random Key to input into the main server
+
+
+    - menu options:
+        -File   
+            - new engine
+            - open engine config
+            - save engine config
+            - exit program
+        - mode
+            - switch between server,client and standalone
+    
+    - Engines will be classes that can be created that way saving them will be a breeze
+        - the type of engine will be determined by the operating system (windows 10, Linux (ubuntu), or windows server)
+         - win.eng
+         - ubu.eng
+         - srv.eng
+        
+    - views notes
+        - main.html
+            - will show recent engines that are saved
+            - also a desc of the program and what notes
+            - whenever the user creates a new engine the option to choose the mode will pop up until the user selects which mode to use
+                - then it will direct the user to different pages 
+            - uses icpmain to send the engine to the renderer
+            
+        - standalone
+            - will give options for the standalone version of the program
+        - client
+            - will give options just like the standalone 
+            - will also generate UID key for server interation
+            - input server password
+        - server
+            - will show running clients
+            - adding new clients via UID
+            - match UID with custom names
+            - setting password
+
+    - generic notes
+        - Include sample engines for each system
+        - when opening a new engine or creating a new engine clear the window
+
+    - engine notes
+        - take all the score reports I can find and create a vuln for each along with a way to score it
+        - talk to josh from EOC and Clark from Francis tuttle in order to try and get score reports to put in vulnerabilities
+        - ability for custom vulns
+        - possible be saved as formatted JSON?
+        - see engTemplate.eng
+        - allow users to hover over the vulnerabilities and get a description of what it does
+
+        -JSON notes
+            - policy violation: the type should be a drop down with: software, files, services

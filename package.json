@@ -1,0 +1,14 @@
+{
+  "name": "cpengine",
+  "version": "1.0.0",
+  "description": "CyberPatriot scoring engine for windows/linux",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Ethan Fowler",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^4.0.0"
+  }
+}

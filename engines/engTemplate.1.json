@@ -1,0 +1,107 @@
+{
+    "name": "engTemplate.1.eng",
+    "path": "C:\\Users\\efowler\\Documents\\GitHub\\CPEngine\\engines\\engTemplate.eng",
+    "type": "standalone",
+    "os": "ubuntu",
+    "vulnerabilities": {
+        "User Policy" : [
+            {
+                "name" : "Bad User",
+                "enabled" : true,
+                "pointValue" : 10,
+                "parameters" : ["user01", "user02"]
+                
+            },
+            {
+                "name" : "Create User",
+                "enabled" : true,
+                "pointValue" : 10,
+                "parameters" : ["newUser"] 
+            }
+        ],
+        "Password Policy" : [
+            {
+                "name" : "Maximum Passowrd Age",
+                "enabled" : true,
+                "pointValue" : 10,
+                "parameters" : null
+            },
+            {
+                "name" : "Minimum Password Age",
+                "enabled" : false,
+                "pointValue" : 10,
+                "parameters" : null
+            }
+        ],
+        "Policy Violation" : [
+            {
+                "name" : "Remove media files",
+                "enabled" : true,
+                "pointValue" : 5,
+                "parameters" : ["/home/exampleUser/music/bad.mp3"]
+                
+            },
+            {
+                "name" : "Remove Software",
+                "enabled" : true,
+                "pointValue" : 10,
+                "parameters" : ["nmap"]
+            }
+        ],
+        "Access Control and Settings" : [
+            {
+                "name" : "SSH Root login Disabled",
+                "enabled" : true,
+                "pointValue" : 10,
+                "parameters" : null
+            }
+        ],
+        "Updates" : [
+            {
+                "name" : "Update Kernel",
+                "enabled" :  true,
+                "pointValue" : 5,
+                "parameters" : null
+            },
+            {
+                "name" : "Check for automatic update",
+                "enabled" : true,
+                "pointValue" : 5,
+                "parameters" : null
+            }
+        ],
+        "Insecure Services" : [
+            {
+                "name" : "Disable anon ftp login",
+                "enabled" : false,
+                "pointValue" : 10,
+                "parameters" : null
+            }
+        ],
+        "Malware" : [
+            {
+                "name" : "Remove backdoor",
+                "enabled" : true,
+                "pointValue" : 10,
+                "parameters" : ["/var/log/misc/backdoor.php"]
+            }
+        ],
+        "Forensics Questions" : [
+            {
+                "name" : "Forensics question 1",
+                "enabled" : true,
+                "pointValue" : 10,
+                "question" : "How much wood did a wood chuck chuck?",
+                "answer" : "5"
+            }
+        ],
+        "Firewall" : [
+            { 
+                "name" : "Open firewall port",
+                "enabled" : true,
+                "pointValue" : 10,
+                "parameters" : [25]
+            }
+        ]
+    }
+}

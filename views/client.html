@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Client</title>
+    </head>
+
+    <body>
+        <h1>CPEngine v1.0</h1>
+        <h2>Client</h2>
+    </body>
+
+    <script>
+        const electron = require('electron');
+        const fs = require('fs');
+        const {ipcRenderer} = electron;
+
+        const ul = document.querySelector('ul');
+        ipcRenderer.on('engine:load', function(e, engineObj) {
+            console.log("recieved engine:load");
+            const li = document.createElement('li');
+            //loop through all the keys of the engineObj and allow them to be changed
+            const engineParams = document.createTextNode(engineObj.name);
+            li.appendChild(engineParams);
+            ul.appendChild(li);
+        });
+
+        document.getElementById("generate").addEventListener("click", function(event){
+            event.preventDefault();
+            //Take all the elements in the list and create a JSON object to be sent to the main program
+            const engineObj = document.querySelector('ul').value;
+            ipcRenderer.send('engine:generate', engineObj)
+        }); 
+
+        ipcRenderer.on('engine:save', function(e) {
+            //Take all the elements in the list and create a JSON object to be sent to the main program
+            const engineObj = document.querySelector('ul').value;
+            ipcRenderer.send('engine:save', engineObj)
+        })
+    </script>
+</html>

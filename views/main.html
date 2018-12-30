@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Main</title>
+    </head>
+    
+    <body>
+        <h1>CPEngine v1.0</h1>
+        <h2>Main</h2>
+        <form>
+            <div id='engine'>
+                <table>
+
+                </table>
+                <table id='vulns'>
+                    
+                </table>
+            </div>
+            <button type='submit' id='generate'>Generate engine</button>
+            
+        </form>
+    </body>
+
+    <script src='scripts/loadEngine.js'></script>
+    <script>
+        const electron = require('electron');
+        const fs = require('fs');
+        const {ipcRenderer} = electron;
+
+        document.getElementById('generate').addEventListener('click', function(event) {
+            event.preventDefault();
+            console.log("generating engine");
+        });
+
+        ipcRenderer.on('engine:load', function(e, engineObj) {
+            //Comes from loadEngine.js
+            loadEngine(engineObj);
+        });
+
+        ipcRenderer.on('engine:save', function(e) {
+            //Take all the elements in the table and create a JSON object to be sent to the main program
+            //const engineObj = document.querySelector('ul').value;
+            var engineObj = {'name':'','path':'', 'type':'','os':'', 'vulnerabilities':{}};
+            ipcRenderer.send('engine:save', engineObj)
+        })
+
+    </script>
+</html>

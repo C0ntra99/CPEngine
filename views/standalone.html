@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Standalone</title>
+    </head>
+    
+    <body>
+        <h1>CPEngine v1.0</h1>
+        <h2>Standalone</h2>
+        <form>
+            <div id='engine'>
+                <table>
+                </table>
+
+                
+            </div>
+            <button type='submit' id='generate'>Generate engine</button>
+            
+        </form>
+    </body>
+
+    <script src='scripts/loadEngine.js'></script>
+    <script>
+        const electron = require('electron');
+        const fs = require('fs');
+        const {ipcRenderer} = electron;
+
+        const table = document.querySelector('table');
+        ipcRenderer.on('engine:load', function(e, engineObj) {
+            //Comes from loadEngine.js
+            loadEngine(engineObj);
+        });
+
+        document.getElementById("generate").addEventListener("click", function(event){
+            event.preventDefault();
+            //Take all the elements in the list and create a JSON object to be sent to the main program
+            const engineObj = document.querySelector('ul').value;
+            ipcRenderer.send('engine:generate', engineObj)
+        }); 
+
+        // document.getElementById("NewFQ").addEventListener("click", function(e){
+        //     e.preventDefault();
+        //     //Create a new value in the table
+        //     var table = document.getElementById('table:Forensics Questions');
+        //     var tr = document.createElement('tr');
+        //     for ( x of [1,2,3]){
+        //         console.log(x);
+        //     }
+        // });
+
+        ipcRenderer.on('engine:save', function(e) {
+            //Take all the elements in the list and create a JSON object to be sent to the main program
+            const engineObj = document.querySelector('ul').value;
+            ipcRenderer.send('engine:save', engineObj)
+        })
+    </script>
+</html>
