@@ -1,5 +1,8 @@
 function loadEngine(engineObj) {
+    //console.log(engineObj["vulnerabilities"]["Forensics Questions"]);
+
     const table = document.querySelector('table');
+    table.setAttribute('id', 'properties');
     const colName = document.createElement('tr')
     for (var key in engineObj) {
         if(engineObj.hasOwnProperty(key)) {
@@ -131,11 +134,6 @@ function loadEngine(engineObj) {
                 for (var key in vulnerabilities[category][vulns]) {
                     var td = document.createElement('td');
                     switch(typeof(vulnerabilities[category][vulns][key])) {
-                        case 'string':                           
-                            var value = document.createElement('td');
-                            value.appendChild(document.createTextNode(vulnerabilities[category][vulns][key]));        
-                            break;
-
                         case 'boolean':
                             //var value = document.createElement('td');
                             var value = document.createElement('input');
@@ -143,6 +141,11 @@ function loadEngine(engineObj) {
                             if (vulnerabilities[category][vulns][key] == true) {
                                 value.setAttribute('checked', '');
                             }
+                            break;
+
+                        case 'string':                           
+                            var value = document.createElement('td');
+                            value.appendChild(document.createTextNode(vulnerabilities[category][vulns][key]));        
                             break;
 
                         case 'number':
@@ -173,13 +176,13 @@ function loadEngine(engineObj) {
             
             if ( category == 'Forensics Questions') {
                 //Create the add more button
-                var tr = document.createElement('tr');
+                var location = document.getElementById('category:Forensics Questions');
                 var createMore = document.createElement('button');
                 createMore.setAttribute('id', 'NewFQ');
                 createMore.innerText = "New question";
-                tr.appendChild(createMore);
-                vulnTable.appendChild(tr);
-                engine.appendChild(vulnTable);
+                location.appendChild(createMore);
+                //vulnTable.appendChild(tr);
+                //engine.appendChild(vulnTable);
             }
         }
     }
@@ -215,9 +218,10 @@ function loadEngine(engineObj) {
                 default:
                     continue;
             }
+            td.appendChild(value);
             tr.appendChild(td);
             table.appendChild(tr);
-            engine.appendChild(table);
+            
         };
     });
 }

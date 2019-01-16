@@ -60,6 +60,7 @@ function openEngine() {
         return;
     } else {
         engineObj = JSON.parse(fs.readFileSync(engineObj[0]));
+        console.log(engineObj['vulnerabilities']['Forensics Questions']);
         return engineObj; 
     }
        

@@ -12,7 +12,6 @@
                 <table>
                 </table>
 
-                
             </div>
             <button type='submit' id='generate'>Generate engine</button>
             
@@ -20,6 +19,7 @@
     </body>
 
     <script src='scripts/loadEngine.js'></script>
+    <script src='scripts/saveEngine.js'></script>
     <script>
         const electron = require('electron');
         const fs = require('fs');
@@ -28,6 +28,7 @@
         const table = document.querySelector('table');
         ipcRenderer.on('engine:load', function(e, engineObj) {
             //Comes from loadEngine.js
+            console.log(engineObj);
             loadEngine(engineObj);
         });
 
@@ -38,20 +39,11 @@
             ipcRenderer.send('engine:generate', engineObj)
         }); 
 
-        // document.getElementById("NewFQ").addEventListener("click", function(e){
-        //     e.preventDefault();
-        //     //Create a new value in the table
-        //     var table = document.getElementById('table:Forensics Questions');
-        //     var tr = document.createElement('tr');
-        //     for ( x of [1,2,3]){
-        //         console.log(x);
-        //     }
-        // });
-
         ipcRenderer.on('engine:save', function(e) {
             //Take all the elements in the list and create a JSON object to be sent to the main program
-            const engineObj = document.querySelector('ul').value;
-            ipcRenderer.send('engine:save', engineObj)
+            //const engineObj = document.querySelector('ul').value;
+            saveEngine();
+            //ipcRenderer.send('engine:save', engineObj)
         })
     </script>
 </html>
